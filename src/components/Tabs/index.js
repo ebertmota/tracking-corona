@@ -27,7 +27,7 @@ export default class Tabs extends Component {
             <Icon name="refresh" size={24} color="#FFF" />
             <TabText>Atualizar dados</TabText>
           </TabItem>
-          <TabItem onPress={() => this.props.navigate('Search')}>
+          <TabItem onPress={() => this.props.navigate('Details')}>
             <Icon name="more" size={24} color="#FFF" />
             <TabText>Mais informações</TabText>
           </TabItem>
