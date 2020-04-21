@@ -37,7 +37,7 @@ export default class Main extends Component {
     super(props);
 
     this.state = {
-      suspects: 0,
+      lethality: 0,
       confirmed: 0,
       deaths: 0,
       updated_at: '',
@@ -54,15 +54,24 @@ export default class Main extends Component {
   loadData = async () => {
     const response = await api.get('/api/report/v1/brazil');
 
-    const { data } = response.data;
+    const { data } = await response.data;
 
     this.setState({
-      suspects: data.cases,
       confirmed: data.confirmed,
       deaths: data.deaths,
       updated_at: data.updated_at,
       loading: false,
     });
+
+    await this.setLethality();
+  };
+
+  setLethality = () => {
+    const { deaths, confirmed: cases } = this.state;
+
+    const lethalityValue = (deaths / cases) * 100;
+    const lethalityPercent = lethalityValue.toFixed(1);
+    this.setState({ lethality: lethalityPercent });
   };
 
   handleDate = () => {
@@ -93,21 +102,21 @@ export default class Main extends Component {
   };
 
   sendWhatsapp = () => {
-    const { suspects, confirmed, deaths, updated_at } = this.state;
+    const { lethality, confirmed, deaths, updated_at } = this.state;
 
     const message = `
-    Casos de coronavírus no Brasil Atualizados ${updated_at}.%0A
+    🇧🇷 Casos de coronavírus no Brasil Atualizados ${updated_at}.%0A
     *${confirmed}* Confirmados  %0A
-    *${suspects}* Suspeitos %0A
     *${deaths}* Mortes %0A
-    � *Evite fake news* � %0A
+    Letalidade de *${lethality}${encodeURIComponent('%')}* %0A
+    🚨 Evite fake news 🚨 %0A
     Sobre a doença: coronavirus.saude.gov.br/index.php/sobre-a-doenca`;
 
     Linking.openURL(`whatsapp://send?text=${message}`);
   };
 
   render() {
-    const { suspects, confirmed, deaths, updated_at, loading } = this.state;
+    const { lethality, confirmed, deaths, updated_at, loading } = this.state;
 
     return (
       <Container colors={['#C04848', '#480048']}>
@@ -125,8 +134,8 @@ export default class Main extends Component {
                   <Image source={brazilLogo} />
                   <Row>
                     <Block>
-                      <Title>Suspeitos</Title>
-                      <Description>{suspects}</Description>
+                      <Title>Letalidade</Title>
+                      <Description color="#f37575">{lethality}%</Description>
                     </Block>
                     <Block>
                       <Title>Confirmados</Title>
@@ -134,7 +143,7 @@ export default class Main extends Component {
                     </Block>
                     <Block>
                       <Title>Mortes</Title>
-                      <Description color="#ff6363">{deaths}</Description>
+                      <Description color="#f8b642">{deaths}</Description>
                     </Block>
                   </Row>
                 </>
