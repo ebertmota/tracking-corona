@@ -49,7 +49,6 @@ export const Image = styled.Image`
 `;
 
 export const Share = styled(TouchableOpacity)`
-  display: flex;
   align-items: center;
   flex-direction: row;
 `;
