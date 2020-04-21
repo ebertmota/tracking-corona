@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
-import { Browser } from './styles';
+import { Browser, Spinner } from './styles';
 
 class Details extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+    };
+  }
+
+  displaySpinner = () => {
+    return <Spinner size="large" color="#C04848" />;
+  };
+
   render() {
-    return <Browser source={{ uri: 'https://covid.saude.gov.br/' }} />;
+    return (
+      <Browser
+        startInLoadingState={true}
+        source={{ uri: 'https://covid.saude.gov.br/' }}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        renderLoading={() => this.displaySpinner()}
+      />
+    );
   }
 }
 
