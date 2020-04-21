@@ -81,6 +81,8 @@ target 'trackingCoronavirus' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   target 'trackingCoronavirusTests' do
     inherit! :complete
     # Pods for testing
