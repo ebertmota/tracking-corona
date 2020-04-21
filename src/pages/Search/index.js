@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { hideNavigationBar } from 'react-native-navigation-bar-color';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { ActivityIndicator, Linking } from 'react-native';
+import { ActivityIndicator, Linking, Keyboard } from 'react-native';
 import SearchIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../../services/api';
@@ -65,6 +66,8 @@ export default class Search extends Component {
     });
 
     this.handleDate();
+    Keyboard.dismiss();
+    hideNavigationBar();
   };
 
   handleDate = () => {
@@ -91,7 +94,7 @@ export default class Search extends Component {
     *${confirmed}* Confirmados  %0A
     *${suspects}* Suspeitos %0A
     *${deaths}* Mortes %0A
-    � *Evite fake news* � %0A
+    🚨 *Evite fake news* 🚨 %0A
     Sobre a doença: coronavirus.saude.gov.br/index.php/sobre-a-doenca`;
 
     Linking.openURL(`whatsapp://send?text=${message}`);
