@@ -6,13 +6,13 @@ Tracking Corona é um app simples em React Native que consome os dados da <a hre
 
 <h2>Como instalar?</h2>
 
-Você pode [Baixar o APK](https://github.com/ebertmota/tracking-coronavirus/releases) ou rodar o projeto em sua máquina.
+Você pode [Baixar o APK](https://github.com/ebertmota/tracking-corona/releases) ou rodar o projeto em sua máquina.
 
 <h3>Como rodar o projeto?</h3>
 Primeiramente clone o repositório
 
 ```sh
-  git clone https://github.com/ebertmota/tracking-coronavirus.git
+  git clone https://github.com/ebertmota/tracking-corona.git
 ```
 Agora é só você entrar na pasta do projeto e baixar as dependências:
 
