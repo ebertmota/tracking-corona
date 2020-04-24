@@ -1,4 +1,10 @@
 <h1 align="center">Tracking Corona</h1>
+            
+
+|                             |                             |                                 |
+| :-------------------------- | :-------------------------: | :-----------------------------: |
+| ![01](https://user-images.githubusercontent.com/48302018/80160356-d2bd3480-85a3-11ea-9f89-727d9099fd3d.jpg) | ![02](https://user-images.githubusercontent.com/48302018/80160462-1a43c080-85a4-11ea-867b-fa79212eefb0.jpg) | ![03](https://user-images.githubusercontent.com/48302018/80161025-7f4be600-85a5-11ea-96ab-73571f43de24.jpg) |
+|                             |                             |                                 |
 
 <h2>Objetivo</h2>
 Tracking Corona é um app simples em React Native que consome os dados da <a href="https://github.com/devarthurribeiro/covid19-brazil-api">COVID-19 Brazil API</a> para mostrar o número atual de mortes, casos confirmados, suspeitos e a taxa de letalidade do novo coronavírus. Ele também permite que você compartilhe a situação atual da doença no Brasil ou em um estado específico.
