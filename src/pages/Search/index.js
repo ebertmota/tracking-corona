@@ -62,7 +62,7 @@ export default class Search extends Component {
       loading: false,
       updated_at: data.datetime,
       state: data.state,
-      image_url: `https://ap.imagensbrasil.org/images/2020/04/19/${uf}.jpg`,
+      image_url: `https://ap.imagensbrasil.org/images/2020/05/19/${uf}.jpg`,
     });
 
     this.handleDate();
@@ -98,6 +98,10 @@ export default class Search extends Component {
     Sobre a doença: coronavirus.saude.gov.br/index.php/sobre-a-doenca`;
 
     Linking.openURL(`whatsapp://send?text=${message}`);
+  };
+
+  formatNumber = (num) => {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
   };
 
   render() {
@@ -148,19 +152,29 @@ export default class Search extends Component {
                         <Row>
                           <Block>
                             <Title>Suspeitos</Title>
-                            <Description>
-                              {suspects === undefined ? 'Oi' : suspects}
+                            <Description numberOfLines={1} adjustsFontSizeToFit>
+                              {this.formatNumber(suspects)}
                             </Description>
                           </Block>
                           <Block>
                             <Title>Confirmados</Title>
-                            <Description color="#639a67">
-                              {confirmed}
+                            <Description
+                              color="#639a67"
+                              numberOfLines={1}
+                              adjustsFontSizeToFit
+                            >
+                              {this.formatNumber(confirmed)}
                             </Description>
                           </Block>
                           <Block>
                             <Title>Mortes</Title>
-                            <Description color="#ff6363">{deaths}</Description>
+                            <Description
+                              color="#ff6363"
+                              numberOfLines={1}
+                              adjustsFontSizeToFit
+                            >
+                              {this.formatNumber(deaths)}
+                            </Description>
                           </Block>
                         </Row>
                       </>
