@@ -115,6 +115,10 @@ export default class Main extends Component {
     Linking.openURL(`whatsapp://send?text=${message}`);
   };
 
+  formatNumber = (num) => {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+  };
+
   render() {
     const { lethality, confirmed, deaths, updated_at, loading } = this.state;
 
@@ -139,13 +143,26 @@ export default class Main extends Component {
                     </Block>
                     <Block>
                       <Title>Confirmados</Title>
-                      <Description color="#639a67">{confirmed}</Description>
+                      <Description
+                        numberOfLines={1}
+                        adjustsFontSizeToFit
+                        color="#639a67"
+                      >
+                        {this.formatNumber(confirmed)}
+                      </Description>
                     </Block>
                     <Block>
                       <Title>Mortes</Title>
-                      <Description color="#f8b642">{deaths}</Description>
+                      <Description
+                        numberOfLines={1}
+                        adjustsFontSizeToFit
+                        color="#f8b642"
+                      >
+                        {this.formatNumber(deaths)}
+                      </Description>
                     </Block>
                   </Row>
+                  {/* 265896 */}
                 </>
               )}
             </CardContent>
