@@ -17,8 +17,8 @@ export const CardHeader = styled.View`
 
 export const CardContent = styled.View`
   flex: 1;
-  padding: 0 30px;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Block = styled.View`
@@ -47,7 +47,7 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.Text`
-  font-size: 32px;
+  font-size: 28px;
   color: ${(props) => (props.color ? props.color : '#333')};
   margin-top: 3px;
 `;
