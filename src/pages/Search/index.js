@@ -17,8 +17,6 @@ import {
   Annotation,
 } from './styles';
 
-// import stateImage from '../../assets/brasil.png';
-
 import {
   Card,
   CardHeader,
@@ -32,6 +30,8 @@ import {
   ErrorTitle,
   ErrorText,
 } from '../../components/Card/styles';
+
+import flag from '../../utils/flagImages';
 
 export default class Search extends Component {
   constructor(props) {
@@ -56,13 +56,12 @@ export default class Search extends Component {
     const { data } = response;
 
     this.setState({
-      suspects: data.suspects,
-      confirmed: data.cases,
-      deaths: data.deaths,
+      suspects: this.formatNumber(data.suspects),
+      confirmed: this.formatNumber(data.cases),
+      deaths: this.formatNumber(data.deaths),
       loading: false,
       updated_at: data.datetime,
       state: data.state,
-      image_url: `https://ap.imagensbrasil.org/images/2020/05/19/${uf}.jpg`,
     });
 
     this.handleDate();
@@ -90,7 +89,7 @@ export default class Search extends Component {
     const { suspects, confirmed, deaths, updated_at, state } = this.state;
 
     const message = `
-    [ *${state}* ] Casos de coronavírus Atualizados em ${updated_at}.%0A
+    [ *${state}* ] Casos de coronavírus Atualizados em ${updated_at}. %0A
     *${confirmed}* Confirmados  %0A
     *${suspects}* Suspeitos %0A
     *${deaths}* Mortes %0A
@@ -104,8 +103,16 @@ export default class Search extends Component {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
   };
 
+  clearNumberValue = () => {
+    this.setState({
+      suspects: '',
+      confirmed: '',
+      deaths: '',
+    });
+  };
+
   render() {
-    const { uf, suspects, confirmed, deaths, loading, image_url } = this.state;
+    const { uf, suspects, confirmed, deaths, loading } = this.state;
 
     return (
       <Container colors={['#C04848', '#480048']}>
@@ -116,7 +123,12 @@ export default class Search extends Component {
             maxLength={2}
             autoCapitalize="characters"
             placeholder="UF desejada..."
-            onChangeText={(text) => this.setState({ uf: text.toUpperCase() })}
+            onChangeText={(text) => {
+              this.setState({
+                uf: text.toUpperCase(),
+              });
+              this.clearNumberValue();
+            }}
             returnKeyType="send"
             onSubmitEditing={this.handleSearch}
           />
@@ -147,13 +159,16 @@ export default class Search extends Component {
                       </Error>
                     ) : (
                       <>
-                        <Image source={{ uri: image_url }} />
+                        <Image
+                          // source={require(`../../assets/flags/${uf}.jpg`)}
+                          source={flag[uf]}
+                        />
 
                         <Row>
                           <Block>
                             <Title>Suspeitos</Title>
                             <Description numberOfLines={1} adjustsFontSizeToFit>
-                              {this.formatNumber(suspects)}
+                              {suspects}
                             </Description>
                           </Block>
                           <Block>
@@ -163,7 +178,7 @@ export default class Search extends Component {
                               numberOfLines={1}
                               adjustsFontSizeToFit
                             >
-                              {this.formatNumber(confirmed)}
+                              {confirmed}
                             </Description>
                           </Block>
                           <Block>
@@ -173,7 +188,7 @@ export default class Search extends Component {
                               numberOfLines={1}
                               adjustsFontSizeToFit
                             >
-                              {this.formatNumber(deaths)}
+                              {deaths}
                             </Description>
                           </Block>
                         </Row>
