@@ -9,11 +9,6 @@ export const Container = styled(LinearGradient)`
   align-items: center;
 `;
 
-export const Form = styled.View`
-  flex-direction: row;
-  padding-bottom: 20px;
-`;
-
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#aaa',
 })`
@@ -56,4 +51,20 @@ export const Share = styled(TouchableOpacity)`
 export const Annotation = styled.Text`
   color: #666;
   margin-left: 10px;
+`;
+
+export const SelectContainer = styled.View`
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+`;
+
+export const SelectItem = styled.View`
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
 `;
