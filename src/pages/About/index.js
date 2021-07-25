@@ -10,24 +10,15 @@ import {
   LinkText,
   Text,
   TitleContainer,
-  SubTitle,
+  DevCard,
+  DevLinks,
+  Separator,
+  DevTitle,
 } from './styles';
 
 function About() {
   return (
     <Container>
-      <Paragraph>
-        <TitleContainer>
-          <Icon name="report-problem" size={18} />
-          <Title>Atenção!</Title>
-        </TitleContainer>
-
-        <Text>
-          Na nova divulgação do governo, são divulgados apenas o número de casos
-          e de mortes, portanto o campo de suspeitos não é consistente.
-        </Text>
-      </Paragraph>
-
       <Paragraph>
         <TitleContainer>
           <Icon name="data-usage" size={18} color="#c04848" />
@@ -67,23 +58,28 @@ function About() {
 
       <Paragraph>
         <TitleContainer>
-          <Icon name="code" size={18} color="#a825c2" />
-          <Title>Desenvolvimento</Title>
+          <Icon name="code" size={20} color="#a825c2" />
+          <Title>{` Desenvolvimento`}</Title>
         </TitleContainer>
 
-        <SubTitle>Ebert Mota</SubTitle>
-        <Link onPress={() => Linking.openURL('https://github.com/ebertmota')}>
-          <FaIcon name="github" size={14} color="#a825c2" />
-          <LinkText color="#a825c2">Github</LinkText>
-        </Link>
-        <Link
-          onPress={() =>
-            Linking.openURL('https://www.linkedin.com/in/ebertmota/')
-          }
-        >
-          <FaIcon name="linkedin" size={14} color="#a825c2" />
-          <LinkText color="#a825c2">Linkedin</LinkText>
-        </Link>
+        <DevCard>
+          <DevTitle>Ebert Mota</DevTitle>
+          <DevLinks>
+            <Link
+              onPress={() => Linking.openURL('https://github.com/ebertmota')}
+            >
+              <FaIcon name="github" size={20} />
+            </Link>
+            <Separator />
+            <Link
+              onPress={() =>
+                Linking.openURL('https://www.linkedin.com/in/ebertmota/')
+              }
+            >
+              <FaIcon name="linkedin" size={20} />
+            </Link>
+          </DevLinks>
+        </DevCard>
       </Paragraph>
     </Container>
   );

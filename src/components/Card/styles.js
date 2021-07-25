@@ -6,6 +6,7 @@ export const Card = styled.View`
   border-radius: 4px;
   margin: 0 20px;
   height: 100%;
+  justify-content: center;
 `;
 
 export const CardHeader = styled.View`
@@ -21,12 +22,18 @@ export const CardContent = styled.View`
   align-items: center;
 `;
 
+export const BlockContainer = styled.View`
+  margin-top: 30px;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+`;
+
 export const Block = styled.View`
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
+  width: 110px;
 `;
 
 export const Image = styled.Image`
@@ -35,25 +42,21 @@ export const Image = styled.Image`
   margin: 0 auto;
 `;
 
-export const Row = styled.View`
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-`;
-
 export const Title = styled.Text`
   font-size: 13px;
   color: #999;
 `;
 
-export const Description = styled.Text`
-  font-size: 28px;
+export const Description = styled.Text.attrs({
+  numberOfLines: 1,
+})`
+  font-size: 22px;
   color: ${(props) => (props.color ? props.color : '#333')};
   margin-top: 3px;
 `;
 
 export const CardFooter = styled.View`
-  padding: 30px;
+  padding: 25px 30px;
   background: #eee;
   border-radius: 4px;
 `;

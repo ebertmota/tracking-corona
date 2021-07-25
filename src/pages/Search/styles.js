@@ -40,7 +40,7 @@ export const Content = styled.View`
 export const Image = styled.Image`
   width: 200px;
   height: 130px;
-  margin: 0 auto;
+  margin-bottom: 30px;
 `;
 
 export const Share = styled(TouchableOpacity)`

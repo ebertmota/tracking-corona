@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
   padding: 15px;
   flex-direction: column;
@@ -24,7 +26,7 @@ export const Title = styled.Text`
 
 export const Paragraph = styled.View`
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 45px;
 `;
 
 export const Link = styled(TouchableOpacity)`
@@ -43,11 +45,26 @@ export const LinkText = styled.Text`
 export const Text = styled.Text`
   font-size: 14px;
   color: #666;
+  margin-bottom: 15px;
 `;
 
-export const SubTitle = styled.Text`
+export const DevCard = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 5px;
+  padding: 5px 20px;
+`;
+
+export const DevLinks = styled.View`
+  flex-direction: row;
+`;
+
+export const DevTitle = styled.Text`
   font-size: 16px;
-  border-bottom-width: 1px;
-  border-bottom-color: #a825c2;
   padding: 10px 0;
+`;
+
+export const Separator = styled.View`
+  margin: 0 5px;
 `;

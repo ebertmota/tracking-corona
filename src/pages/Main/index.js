@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Linking } from 'react-native';
+import { ActivityIndicator, Linking, Alert } from 'react-native';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
@@ -21,9 +21,9 @@ import {
   Description,
   CardFooter,
   Annotation,
+  BlockContainer,
   Block,
   Image,
-  Row,
 } from '../../components/Card/styles';
 
 export default class Main extends Component {
@@ -101,18 +101,29 @@ export default class Main extends Component {
     navigation.navigate(page);
   };
 
-  sendWhatsapp = () => {
+  sendWhatsapp = async () => {
     const { lethality, confirmed, deaths, updated_at } = this.state;
 
     const message = `
     🇧🇷 Casos de coronavírus no Brasil Atualizados ${updated_at}.%0A
-    *${confirmed}* Confirmados  %0A
-    *${deaths}* Mortes %0A
+    *${this.formatNumber(confirmed)}* Confirmados  %0A
+    *${this.formatNumber(deaths)}* Mortes %0A
     Letalidade de *${lethality}${encodeURIComponent('%')}* %0A
     🚨 Evite fake news 🚨 %0A
     Sobre a doença: coronavirus.saude.gov.br/index.php/sobre-a-doenca`;
 
-    Linking.openURL(`whatsapp://send?text=${message}`);
+    const whatsappIsIntalled = await Linking.canOpenURL(
+      `whatsapp://send?text=${message}`
+    );
+
+    if (whatsappIsIntalled) {
+      Linking.openURL(`whatsapp://send?text=${message}`);
+    } else {
+      Alert.alert(
+        'Não foi possivel compartilhar',
+        'Você precisa ter o Whatsapp instalado para compartilhar os dados.'
+      );
+    }
   };
 
   formatNumber = (num) => {
@@ -136,7 +147,7 @@ export default class Main extends Component {
               ) : (
                 <>
                   <Image source={brazilLogo} />
-                  <Row>
+                  <BlockContainer>
                     <Block>
                       <Title>Letalidade</Title>
                       <Description color="#f37575">{lethality}%</Description>
@@ -161,8 +172,7 @@ export default class Main extends Component {
                         {this.formatNumber(deaths)}
                       </Description>
                     </Block>
-                  </Row>
-                  {/* 265896 */}
+                  </BlockContainer>
                 </>
               )}
             </CardContent>
